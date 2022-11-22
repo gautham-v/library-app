@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+    <h1>My Book Library</h1>
+    <p>Keep track of the books you've read and books you wish to read by adding them to your library</p>
+    <form>
+        <label for="book">Book </label>
+        <input type="text" id="book" name="book" 
+            minlength="2" maxlength="50" size="20">
+        <label for="author">Author </label>
+        <input type="text" id="author" name="author" 
+            minlength="2" maxlength="50" size="20">
+        <label for="read">Read </label>
+        <input type="checkbox" id="read" name="read" value="read">
+        <input type="submit" class="addBtn" value="Add to Library">
+    </form>
+    <table id="table">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>Harry Potter and the Half-Blood Prince</td>
+            <td>J.K. Rowling</td>
+            <td><button>Read</button></td>
+            <td><button>Remove</button></td>
+        </tr>
+        <tr>
+            <td>Flowers for Algernon</td>
+            <td>Daniel Keyes</td>
+            <td><button>Read</button></td>
+            <td><button>Remove</button></td>
+        </tr>
+    </table>
+</body>
+<script src="library.js"></script> 
+</html>

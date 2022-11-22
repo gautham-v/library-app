@@ -10,16 +10,16 @@
 <body>
     <h1>My Book Library</h1>
     <p>Keep track of the books you've read and books you wish to read by adding them to your library</p>
-    <form>
-        <label for="book">Book </label>
-        <input type="text" id="book" name="book" 
-            minlength="2" maxlength="50" size="20">
+    <form action="/" id="add-book-form" class="add-book-form" method="get">
+        <label for="title">Book </label>
+        <input type="text" id="title" name="title" 
+            minlength="2" maxlength="50" size="20" required>
         <label for="author">Author </label>
         <input type="text" id="author" name="author" 
-            minlength="2" maxlength="50" size="20">
+            minlength="2" maxlength="50" size="20" required>
         <label for="read">Read </label>
         <input type="checkbox" id="read" name="read" value="read">
-        <input type="submit" class="addBtn" value="Add to Library">
+        <button type="submit" class="addBtn" value="Update" form="add-book-form">Add to Library</button>
     </form>
     <table id="table">
         <tr>
@@ -28,19 +28,20 @@
             <th>Status</th>
             <th>Action</th>
         </tr>
-        <tr>
+        <tr class="newBook">
             <td>Harry Potter and the Half-Blood Prince</td>
             <td>J.K. Rowling</td>
-            <td><button>Read</button></td>
-            <td><button>Remove</button></td>
+            <td><button class="readBtn">Read</button></td>
+            <td><button class="removeBtn">Remove</button></td>
         </tr>
-        <tr>
+        <tr class="newBook">
             <td>Flowers for Algernon</td>
             <td>Daniel Keyes</td>
-            <td><button>Read</button></td>
-            <td><button>Remove</button></td>
+            <td><button class="readBtn">Read</button></td>
+            <td><button class="removeBtn">Remove</button></td>
         </tr>
     </table>
+    <button class="notReadBtn" hidden></button>
 </body>
-<script src="library.js"></script> 
 </html>
+<script src="library.js"></script> 

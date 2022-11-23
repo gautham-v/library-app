@@ -10,16 +10,16 @@
 <body>
     <h1>My Book Library</h1>
     <p>Keep track of the books you've read and books you wish to read by adding them to your library</p>
-    <form action="/" id="add-book-form" class="add-book-form" method="get">
-        <label for="title">Book </label>
+    <form>
+        <label for="title">Book</label>
         <input type="text" id="title" name="title" 
-            minlength="2" maxlength="50" size="20" required>
-        <label for="author">Author </label>
+            minlength="2" maxlength="50" size="20" required />
+        <label for="author">Author</label>
         <input type="text" id="author" name="author" 
-            minlength="2" maxlength="50" size="20" required>
+            minlength="2" maxlength="50" size="20" required />
         <label for="read">Read </label>
         <input type="checkbox" id="read" name="read" value="read">
-        <button type="submit" class="addBtn" value="Update" form="add-book-form">Add to Library</button>
+        <button type="submit" class="addBtn">Add to Library</button>
     </form>
     <table id="table">
         <tr>

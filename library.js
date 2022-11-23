@@ -9,24 +9,33 @@ function Book(title, author, read) {
 }
 
 // Book.prototype.toggleReadStatus = function toggleReadStatus(event){
-function toggleReadStatus(event){
-    console.log('hello');
+function toggleReadStatus(){
+    console.log('clicked read/not read');
     const currentTitle = this.parentElement.parentElement.children[0].textContent;
-    console.log(currentTitle);
-    if (this.textContent === "Read"){
-        this.textContent = 'Not Read';
-        console.log(book.name);
-    }
-    else {
-        this.textContent = 'Read';
-    }
+    myLibrary.forEach(item => {
+        if (item.title === currentTitle){
+            item.read = !item.read;
+        }
+    })
+    displayLibrary();
 }
 
 function addBookToLibrary(event) {
   // do stuff here
     let book = new Book(title.value, author.value, read.checked);
     //this is canceling form validation
-    event.preventDefault();
+    // const form = document.querySelector('.add-book-form');
+    // const addBtn = document.querySelector('.addBtn');
+    
+    // form.checkValidity();
+    // form.reportValidity();
+    // console.log(`report validity: ${form.reportValidity()}`);
+    // if (form.reportValidity() === false){
+    //     event.preventDefault();
+    //     addBtn.disabled = true;
+    // }
+    //event.preventDefault();
+    
     if (!(myLibrary.includes(book))){ 
         myLibrary.push(book);
     }
@@ -39,33 +48,49 @@ function addBookToLibrary(event) {
     read.checked = false;
 }
 
+function clearTable(){
+    //remove all rows before refreshing table
+    const tr = document.querySelectorAll('.newBook');
+    tr.forEach(trItem => {trItem.remove()});
+}
+
+function generateReadStatus(book){
+    console.log('entered read status');
+    const newReadButton = document.createElement('button');
+    newReadButton.className = 'readBtn';
+
+    // newReadButton.textContent = myLibrary[item].title;
+    if (book.read === true){
+        console.log('read match');
+        newReadButton.innerHTML = 'Read';
+    }
+    else{
+        newReadButton.innerHTML = 'Not Read';
+    }
+    return newReadButton;
+}
+
 function displayLibrary(){
 
     //remove all rows before refreshing table
-    const tr = document.querySelectorAll('.newBook');
-    var trArr = Array.from(tr);
-    trArr.forEach(trItem => {trItem.remove()});
+    clearTable();
 
-    for (let item in myLibrary){
+    //build table from library
+    myLibrary.forEach(book => {
         const newBook = document.createElement('tr');
         newBook.className = 'newBook';
         const newTitle = document.createElement('td');
         const newAuthor = document.createElement('td');
         const newReadCell = document.createElement('td');
         const newRemove = document.createElement('td');
-        const readBtn = document.createElement('button');
+        //const readBtn = document.createElement('button');
         const removeBtn = document.createElement('button');
 
-        newTitle.textContent = myLibrary[item].title;
-        newAuthor.textContent = myLibrary[item].author;
-        if (myLibrary[item].read === true){
-            readBtn.innerHTML = 'Read';
-            readBtn.className = 'readBtn';
-        }
-        else{
-            readBtn.innerHTML = 'Not Read';
-            readBtn.className = 'notReadBtn';
-        }
+        newTitle.textContent = book.title;
+        newAuthor.textContent = book.author;
+        
+        const newReadBtn = generateReadStatus(book);
+
         removeBtn.innerHTML = 'Remove';
         removeBtn.className = 'removeBtn';
 
@@ -76,38 +101,44 @@ function displayLibrary(){
         newBook.appendChild(newReadCell);
         newBook.appendChild(newRemove);
 
-        //add buttons
-        newReadCell.appendChild(readBtn);
+        //add buttons to table
+        newReadCell.appendChild(newReadBtn);
         newRemove.appendChild(removeBtn);
-    }
+    });
+    generateEventListeners();
 }
 
-//query selectors
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const read = document.querySelector('#read');
-const addBtn = document.querySelector(".addBtn");
-const table = document.querySelector('#table');
-const readBtns = document.querySelectorAll('.readBtn');
-const notReadBtns = document.querySelectorAll('.notReadBtn');
-const removeBtns = document.querySelectorAll('.removeBtn');
+function removeBookFromLibrary(){
+    console.log('clicked remove');
+    const currentTitle = this.parentElement.parentElement.children[0].textContent;
+    console.log(currentTitle);
+    myLibrary.forEach(book => {
+        if (book.title === currentTitle){
+            const index = myLibrary.indexOf(book);
+            myLibrary.splice(index, 1);
+        }
+    });
+    displayLibrary();
+}
 
-const readBtn = document.querySelector('.readBtn');
-readBtn.addEventListener('click', toggleReadStatus);
+function generateEventListeners(){
+    //query selectors
+    const addBtn = document.querySelector(".addBtn");
+    const readBtns = document.querySelectorAll('.readBtn');
+    const removeBtns = document.querySelectorAll('.removeBtn');
 
-//event listeners
-addBtn.addEventListener('click',addBookToLibrary);
+    //add event listeners to buttons
+    addBtn.addEventListener('click',addBookToLibrary);
+    readBtns.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
+    removeBtns.forEach(btn => {btn.addEventListener('click',removeBookFromLibrary)});
+}
 
-//read button event listeners
-var readBtnsArr = Array.from(readBtns);
-readBtns.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
-
-var notReadBtnsArr = Array.from(notReadBtns);
-notReadBtns.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
-
+//initialize library
 const hpBook = new Book('Harry Potter and the Half-Blood Prince', 'J.K. Rowling', true);
 const algernonBook = new Book('Flowers for Algernon', 'Daniel Keyes', true);
 myLibrary.push(hpBook);
 myLibrary.push(algernonBook);
-displayLibrary();
+
+generateEventListeners();
+
 

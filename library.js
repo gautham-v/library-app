@@ -10,7 +10,6 @@ function Book(title, author, read) {
 
 // Book.prototype.toggleReadStatus = function toggleReadStatus(event){
 function toggleReadStatus(){
-    console.log('clicked read/not read');
     const currentTitle = this.parentElement.parentElement.children[0].textContent;
     myLibrary.forEach(item => {
         if (item.title === currentTitle){
@@ -20,26 +19,35 @@ function toggleReadStatus(){
     displayLibrary();
 }
 
+function validateForm(event){
+    const form = document.querySelector('.add-book-form');
+    //const addBtn = document.querySelector('.addBtn')
+    form.checkValidity();
+    form.reportValidity();
+    if (form.reportValidity() === true){
+        event.preventDefault();
+        addBookToLibrary(event);
+    }
+    return;
+}
+
 function addBookToLibrary(event) {
   // do stuff here
     let book = new Book(title.value, author.value, read.checked);
-    //this is canceling form validation
-    // const form = document.querySelector('.add-book-form');
-    // const addBtn = document.querySelector('.addBtn');
-    
-    // form.checkValidity();
-    // form.reportValidity();
-    // console.log(`report validity: ${form.reportValidity()}`);
-    // if (form.reportValidity() === false){
-    //     event.preventDefault();
-    //     addBtn.disabled = true;
-    // }
-    //event.preventDefault();
-    
-    if (!(myLibrary.includes(book))){ 
+    const titleFound = myLibrary.some(item => {
+        if (item.title === book.title){
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+    if (titleFound){
+        alert('Title already exists in your library.');
+    }
+    else{ 
         myLibrary.push(book);
     }
-    console.log(myLibrary);
     displayLibrary();
 
     //clear form
@@ -55,13 +63,11 @@ function clearTable(){
 }
 
 function generateReadStatus(book){
-    console.log('entered read status');
     const newReadButton = document.createElement('button');
     newReadButton.className = 'readBtn';
 
     // newReadButton.textContent = myLibrary[item].title;
     if (book.read === true){
-        console.log('read match');
         newReadButton.innerHTML = 'Read';
     }
     else{
@@ -83,7 +89,6 @@ function displayLibrary(){
         const newAuthor = document.createElement('td');
         const newReadCell = document.createElement('td');
         const newRemove = document.createElement('td');
-        //const readBtn = document.createElement('button');
         const removeBtn = document.createElement('button');
 
         newTitle.textContent = book.title;
@@ -109,9 +114,7 @@ function displayLibrary(){
 }
 
 function removeBookFromLibrary(){
-    console.log('clicked remove');
     const currentTitle = this.parentElement.parentElement.children[0].textContent;
-    console.log(currentTitle);
     myLibrary.forEach(book => {
         if (book.title === currentTitle){
             const index = myLibrary.indexOf(book);
@@ -128,7 +131,7 @@ function generateEventListeners(){
     const removeBtns = document.querySelectorAll('.removeBtn');
 
     //add event listeners to buttons
-    addBtn.addEventListener('click',addBookToLibrary);
+    addBtn.addEventListener('click',validateForm);
     readBtns.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
     removeBtns.forEach(btn => {btn.addEventListener('click',removeBookFromLibrary)});
 }

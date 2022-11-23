@@ -68,10 +68,10 @@ function generateReadStatus(book){
 
     // newReadButton.textContent = myLibrary[item].title;
     if (book.read === true){
-        newReadButton.innerHTML = 'Read';
+        newReadButton.innerHTML = '✔️ Read';
     }
     else{
-        newReadButton.innerHTML = 'Not Read';
+        newReadButton.innerHTML = '📖 Not Read';
     }
     return newReadButton;
 }
@@ -96,7 +96,7 @@ function displayLibrary(){
         
         const newReadBtn = generateReadStatus(book);
 
-        removeBtn.innerHTML = 'Remove';
+        removeBtn.innerHTML = '🗑️ Remove';
         removeBtn.className = 'removeBtn';
 
         //add columns

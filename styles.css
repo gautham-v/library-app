@@ -27,59 +27,61 @@ table{
     /* grid-template-columns: 2fr 1fr 1fr 1fr; */
 }
 
-th{
-    background-color: #475569;
-    color: #f8fafc;
-    letter-spacing: 2px;
+th, td{
+    text-align: left;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 12px 15px 12px;
 }
 
 th:first-child{
-    width: 60%;
-}
-
-tr:nth-child(even) {
-    background-color: #e2e8f0;
+    width: 50%;
 }
 
 
-/* th:nth-child(2){
-    width: 20%;
-} */
+th:nth-child(3){
+    width: 90px;
+}
 
-/* table tr th:first-child, table tr td:first-child{
-    color: gray;
-    grid-column: 1 / 2;
-} */
+th:nth-child(4){
+    width: 90px;
+}
 
 form {
     display: grid;
-    grid-template-columns: 80px 1fr 80px 1fr 70px 18px;
-    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 2fr;
     align-items: center;
     justify-items: start;
+    gap: 0px 20px;
 }
 
 label {
-    justify-self: end;
+    justify-self: start;
     margin-right: 10px;
 }
 
 .addBtn {
-    background-color: #3b82f6;
-    border: 1px solid #3b82f6;
+    background-image: linear-gradient(to bottom right, #93c5fd 0%, #3b82f6 51%, #1d4ed8 100%);
+    /* border: 1px solid #3b82f6; */
+    border: none;
     color: white;
-    border-radius: 15px;
-    justify-self: center;
-    grid-row: 2 / 3;
-    grid-column:1 / 7;
-    padding: 12px 30px;
-    margin-top: 10px;
+    border-radius: 14px;
+    justify-self: start;
+    grid-row: 3 / 4;
+    grid-column:1 / 2;
+    padding: 10px 18px;
+    margin: 10px 0px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    font-size: 16px;
+    font-size: 14px;
+}
+
+.addBtn:hover{
+    background-image: linear-gradient(to bottom, #93c5fd 0%, #3b82f6 51%, #1d4ed8 100%);
 }
 
 #title, #author, #read {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    grid-row: 2 / 3;
 }
 
 #title, #author {
@@ -88,17 +90,27 @@ label {
 }
 
 .readBtn, .removeBtn {
-    background-color: #059669;
-    border: 1px solid #059669;
-    color: white;
+    background-color: #ffffff;
+    border: 1px solid #bebebe;
     border-radius: 8px;
     padding: 2px 4px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
     font-size: 14px;
     align-self: center;
 }
 
 .removeBtn{
-    background-color: #b91c1c;
-    border: 1px solid #b91c1c;
+    background-color: #f87171;
+    border: 1px solid #f87171;
+    color: white;
+    padding: 2px 6px;
+}
+
+.readBtn:hover, .removeBtn:hover {
+    background-color: #f6f6f6;
+}
+
+.removeBtn:hover {
+    background-color: #e06565;
+    border: 1px solid #e06565;
 }

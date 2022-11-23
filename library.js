@@ -9,20 +9,23 @@ function Book(title, author, read) {
 }
 
 // Book.prototype.toggleReadStatus = function toggleReadStatus(event){
-// function toggleReadStatus(event){
-//     //const currentTitle = this.parentElement.parentElement.children[0].textContent;
-//     if (this.textContent === "Read"){
-//         this.textContent = 'Not Read';
-//         console.log(book.name);
-//     }
-//     else {
-//         this.textContent = 'Read';
-//     }
-// }
+function toggleReadStatus(event){
+    console.log('hello');
+    const currentTitle = this.parentElement.parentElement.children[0].textContent;
+    console.log(currentTitle);
+    if (this.textContent === "Read"){
+        this.textContent = 'Not Read';
+        console.log(book.name);
+    }
+    else {
+        this.textContent = 'Read';
+    }
+}
 
 function addBookToLibrary(event) {
   // do stuff here
     let book = new Book(title.value, author.value, read.checked);
+    //this is canceling form validation
     event.preventDefault();
     if (!(myLibrary.includes(book))){ 
         myLibrary.push(book);
@@ -89,21 +92,22 @@ const readBtns = document.querySelectorAll('.readBtn');
 const notReadBtns = document.querySelectorAll('.notReadBtn');
 const removeBtns = document.querySelectorAll('.removeBtn');
 
-//create elements
-
-
-// var readBtnsArr = Array.from(readBtns);
-// readBtns.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
-
-// var notReadBtnsArr = Array.from(notReadBtns);
-// notReadBtnsArr.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
+const readBtn = document.querySelector('.readBtn');
+readBtn.addEventListener('click', toggleReadStatus);
 
 //event listeners
 addBtn.addEventListener('click',addBookToLibrary);
+
+//read button event listeners
+var readBtnsArr = Array.from(readBtns);
+readBtns.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
+
+var notReadBtnsArr = Array.from(notReadBtns);
+notReadBtns.forEach(btn => {btn.addEventListener('click',toggleReadStatus)});
 
 const hpBook = new Book('Harry Potter and the Half-Blood Prince', 'J.K. Rowling', true);
 const algernonBook = new Book('Flowers for Algernon', 'Daniel Keyes', true);
 myLibrary.push(hpBook);
 myLibrary.push(algernonBook);
 displayLibrary();
-console.log(myLibrary);
+
